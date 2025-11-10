@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>E-commerce - Search</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <a class="navbar-brand" href="index.html"><img src="assets/images/shopping-logo-ecommerce-logotype-shooping-260nw-1978607771.webp" alt="E-commerce Logo" width="120" class="img-fluid"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="product-view.html">Product View</a></li>
+        <li class="nav-item"><a class="nav-link" href="category.html">Category</a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
+        <li class="nav-item"><a class="nav-link" href="order-confirmation.html">Order Confirmation</a></li>
+        <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+        <li class="nav-item active"><a class="nav-link" href="search.html">Search <span class="sr-only">(current)</span></a></li>
+      </ul>
+      <div class="d-flex">
+        <a href="search.html" class="btn btn-outline-primary mr-2">Search</a>
+        <a href="cart.html" class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-danger" id="cartBadge">0</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="search py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Search Products</h2>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search for products...">
+        <div class="input-group-append"><button class="btn btn-primary" id="searchBtn">Search</button></div>
+      </div>
+      <div class="row" id="productList">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-white text-center p-3 mt-5">
+    <p>&copy; 2025 E-commerce. All rights reserved.</p>
+  </footer>
+
+  <a href="#" class="btn btn-secondary back-to-top" style="position: fixed; bottom: 20px; right: 20px; display: none;">↑</a>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Product data (same as product-view.html)
+      const products = [
+        { id: 'green-dress', name: 'Green Dress', category: 'clothing', price: 400, image: 'assets/images/images.jpeg', description: 'A stylish green dress perfect for casual or semi-formal occasions.', rating: 3 },
+        { id: 'blue-shirt', name: 'Blue Shirt', category: 'clothing', price: 500, image: 'assets/images/download (2).jpeg', description: 'A classic blue shirt crafted from premium cotton.', rating: 3 },
+        { id: 'red-hat', name: 'Red Hat', category: 'clothing', price: 300, image: 'assets/images/download (1).jpeg', description: 'A vibrant red hat made from durable fabric.', rating: 3 },
+        { id: 'smartphone', name: 'Smartphone', category: 'electronics', price: 15000, image: 'assets/images/phone.jpeg', description: 'A high-performance smartphone with a sleek design.', rating: 4 },
+        { id: 'wireless-headphones', name: 'Wireless Headphones', category: 'electronics', price: 5000, image: 'assets/images/headphone.jpeg', description: 'Immersive wireless headphones with noise-canceling technology.', rating: 3 },
+        { id: 'smart-watch', name: 'Smart Watch', category: 'electronics', price: 8000, image: 'assets/images/watch.jpeg', description: 'A stylish smart watch with fitness tracking.', rating: 4 },
+        { id: 'leather-belt', name: 'Leather Belt', category: 'accessories', price: 600, image: 'assets/images/belt.jpeg', description: 'A premium leather belt with a sleek buckle.', rating: 3 },
+        { id: 'sunglasses', name: 'Sunglasses', category: 'accessories', price: 1200, image: 'assets/images/suglass.jpeg', description: 'Trendy sunglasses with UV protection.', rating: 4 },
+        { id: 'backpack', name: 'Backpack', category: 'accessories', price: 2000, image: 'assets/images/bag.jpeg', description: 'A spacious and durable backpack for travel.', rating: 3 }
+      ];
+
+      // Initial population of products
+      function displayProducts(productArray) {
+        const productList = $('#productList');
+        productList.empty();
+        if (productArray.length === 0) {
+          productList.html('<div class="col-12 text-center">No products found</div>');
+        } else {
+          productArray.forEach(product => {
+            productList.append(`
+              <div class="col-md-4 mb-3">
+                <div class="card">
+                  <a href="product-view.html?product=${product.id}">
+                    <img src="${product.image}" class="card-img-top" alt="${product.name}" style="height: 250px; object-fit: cover;">
+                  </a>
+                  <div class="card-body text-center">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text">₹${product.price}</p>
+                  </div>
+                </div>
+              </div>
+            `);
+          });
+        }
+      }
+
+      // Search functionality
+      $('#searchBtn, #searchInput').on('click change keyup', function(e) {
+        if (e.type === 'click' || e.key === 'Enter' || e.type === 'keyup') {
+          const searchTerm = $('#searchInput').val().toLowerCase().trim();
+          const filteredProducts = searchTerm === ''
+            ? products
+            : products.filter(product => product.name.toLowerCase().includes(searchTerm));
+          displayProducts(filteredProducts);
+        }
+      });
+
+      // Initial display
+      displayProducts(products);
+
+      // Cart badge update
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      function updateCartBadge() {
+        $('#cartBadge').text(cart.length);
+      }
+      updateCartBadge();
+    });
+  </script>
+</body>
+</html>

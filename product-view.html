@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>E-commerce - Product View</title>
+  <style>
+    .main-product-image {
+      height: 500px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <a class="navbar-brand" href="index.html"><img src="assets/images/shopping-logo-ecommerce-logotype-shooping-260nw-1978607771.webp" alt="E-commerce Logo" width="120" class="img-fluid"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item active"><a class="nav-link" href="product-view.html">Product View <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="category.html">Category</a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
+        <li class="nav-item"><a class="nav-link" href="order-confirmation.html">Order Confirmation</a></li>
+        <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.html">Search</a></li>
+      </ul>
+      <div class="d-flex">
+        <a href="search.html" class="btn btn-outline-primary mr-2">Search</a>
+        <a href="cart.html" class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-danger" id="cartBadge">0</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="product-view py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img id="mainProductImage" src="assets/images/images.jpeg" class="main-product-image" alt="Main Product">
+        </div>
+        <div class="col-md-6">
+          <h2 id="productTitle">Green Dress</h2>
+          <p class="text-muted" id="productCategory">Category: Clothing</p>
+          <h4 id="productPrice">₹400</h4>
+          <div class="rating mb-3" id="productRating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <p class="mb-3" id="productDescription">A stylish green dress perfect for casual or semi-formal occasions. Made from high-quality, breathable cotton for all-day comfort.</p>
+          <button class="btn btn-primary btn-lg" id="addToCartBtn">Add to Cart</button>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <h3 class="mb-3 w-100">All Products</h3>
+        <div class="row" id="allProducts">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-white text-center p-3 mt-5">
+    <p>&copy; 2025 E-commerce. All rights reserved.</p>
+  </footer>
+
+  <a href="#" class="btn btn-secondary back-to-top" style="position: fixed; bottom: 20px; right: 20px; display: none;">↑</a>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const products = [
+        { id: 'green-dress', name: 'Green Dress', category: 'clothing', price: 400, image: 'assets/images/images.jpeg', description: 'A stylish green dress perfect for casual or semi-formal occasions. Made from high-quality, breathable cotton for all-day comfort.', rating: 3 },
+        { id: 'blue-shirt', name: 'Blue Shirt', category: 'clothing', price: 500, image: 'assets/images/download (2).jpeg', description: 'A classic blue shirt crafted from premium cotton, ideal for both professional and casual settings with a tailored fit.', rating: 3 },
+        { id: 'red-hat', name: 'Red Hat', category: 'clothing', price: 300, image: 'assets/images/download (1).jpeg', description: 'A vibrant red hat made from durable fabric, offering a trendy accessory for sunny days or casual outings.', rating: 3 },
+        { id: 'smartphone', name: 'Smartphone', category: 'electronics', price: 15000, image: 'assets/images/phone.jpeg', description: 'A high-performance smartphone with a sleek design, featuring a vibrant display, fast processor, and advanced camera system.', rating: 4 },
+        { id: 'wireless-headphones', name: 'Wireless Headphones', category: 'electronics', price: 5000, image: 'assets/images/headphone.jpeg', description: 'Immersive wireless headphones with noise-canceling technology, perfect for music lovers and long-lasting battery life.', rating: 3 },
+        { id: 'smart-watch', name: 'Smart Watch', category: 'electronics', price: 8000, image: 'assets/images/watch.jpeg', description: 'A stylish smart watch with fitness tracking, notifications, and a customizable interface, designed for modern lifestyles.', rating: 4 },
+        { id: 'leather-belt', name: 'Leather Belt', category: 'accessories', price: 600, image: 'assets/images/belt.jpeg', description: 'A premium leather belt with a sleek buckle, adding elegance and durability to any outfit.', rating: 3 },
+        { id: 'sunglasses', name: 'Sunglasses', category: 'accessories', price: 1200, image: 'assets/images/suglass.jpeg', description: 'Trendy sunglasses with UV protection, offering both style and eye safety for outdoor adventures.', rating: 4 },
+        { id: 'backpack', name: 'Backpack', category: 'accessories', price: 2000, image: 'assets/images/bag.jpeg', description: 'A spacious and durable backpack, perfect for daily commutes or travel, with multiple compartments for organization.', rating: 3 }
+      ];
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('product') || 'green-dress';
+      const selectedProduct = products.find(p => p.id === productId) || products[0];
+
+      $('#mainProductImage').attr('src', selectedProduct.image).attr('alt', selectedProduct.name);
+      $('#productTitle').text(selectedProduct.name);
+      $('#productCategory').text(`Category: ${selectedProduct.category.charAt(0).toUpperCase() + selectedProduct.category.slice(1)}`);
+      $('#productPrice').text(`₹${selectedProduct.price}`);
+      $('#productDescription').text(selectedProduct.description);
+      $('#productRating').html(Array(5).fill().map((_, i) => i < selectedProduct.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>').join(''));
+
+      const allProductsHtml = products.map(p => `
+        <div class="col-md-4 mb-3 product-item" data-product-id="${p.id}">
+          <div class="card">
+            <a href="javascript:void(0);" class="product-link">
+              <img src="${p.image}" class="card-img-top" alt="${p.name}" style="height: 200px; object-fit: cover;">
+            </a>
+            <div class="card-body text-center">
+              <h5 class="card-title">${p.name}</h5>
+              <p class="card-text">₹${p.price}</p>
+              <div class="rating">
+                ${Array(5).fill().map((_, i) => i < p.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>').join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      $('#allProducts').html(allProductsHtml);
+
+      $('.product-link').click(function() {
+        const clickedProductId = $(this).closest('.product-item').data('product-id');
+        const clickedProduct = products.find(p => p.id === clickedProductId);
+        $('#mainProductImage').attr('src', clickedProduct.image).attr('alt', clickedProduct.name);
+        $('#productTitle').text(clickedProduct.name);
+        $('#productCategory').text(`Category: ${clickedProduct.category.charAt(0).toUpperCase() + clickedProduct.category.slice(1)}`);
+        $('#productPrice').text(`₹${clickedProduct.price}`);
+        $('#productDescription').text(clickedProduct.description);
+        $('#productRating').html(Array(5).fill().map((_, i) => i < clickedProduct.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>').join(''));
+      });
+
+      // Cart functionality
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      function updateCartBadge() {
+        $('#cartBadge').text(cart.length);
+      }
+      updateCartBadge();
+
+      $('#addToCartBtn').click(function() {
+        const cartItem = cart.find(item => item.id === selectedProduct.id);
+        if (cartItem) {
+          cartItem.quantity += 1;
+        } else {
+          cart.push({ ...selectedProduct, quantity: 1 });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        alert(`${selectedProduct.name} added to cart!`);
+      });
+    });
+  </script>
+</body>
+</html>
