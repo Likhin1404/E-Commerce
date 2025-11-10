@@ -7,10 +7,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <title>E-commerce - Products</title>
+  <style>
+    .product-item { transition: opacity 0.3s ease; }
+    .fade-out { opacity: 0; }
+    .fade-in { opacity: 1; }
+    #categoryFilter, .price-range-box { font-weight: 600; margin-bottom: 15px; }
+    .price-range-box { background: #f9f9f9; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .price-range-box input[type="range"] { width: 100%; margin-bottom: 10px; }
+    .price-range-box button { width: 100%; }
+  </style>
 </head>
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <a class="navbar-brand" href="index.html"><img src="assets/images/shopping-logo-ecommerce-logotype-shooping-260nw-1978607771.webp" alt="E-commerce Logo" width="120" class="img-fluid"></a>
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/images/shopping-logo-ecommerce-logotype-shooping-260nw-1978607771.webp" alt="E-commerce Logo" width="120" class="img-fluid">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,18 +41,23 @@
       </ul>
       <div class="d-flex">
         <a href="search.html" class="btn btn-outline-primary mr-2">Search</a>
-        <a href="cart.html" class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-danger">0</span></a>
+        <a href="cart.html" class="btn btn-outline-success">
+          <i class="fas fa-shopping-cart"></i> Cart 
+          <span class="badge badge-danger" id="cartBadge">0</span>
+        </a>
       </div>
     </div>
   </nav>
 
+  <!-- Products Section -->
   <section class="products py-5">
     <div class="container">
       <h2 class="text-center mb-4">Our Products</h2>
       <div class="row">
+        <!-- Filters Sidebar -->
         <div class="col-md-3">
           <h4>Filters</h4>
-          <div class="mb-3">
+          <div class="filter-section">
             <h5>Category</h5>
             <select class="form-control" id="categoryFilter">
               <option value="all">All</option>
@@ -49,144 +66,163 @@
               <option value="accessories">Accessories</option>
             </select>
           </div>
+          <div class="filter-section">
+            <h5>Price Range</h5>
+            <div class="price-range-box p-3 text-center shadow-sm rounded" style="background:#f9f9f9;">
+              <p><span id="minPrice">₹0</span> - <span id="maxPrice">₹20000</span></p>
+              <input type="range" id="minRange" min="0" max="20000" step="100" value="0" class="w-100 mb-2">
+              <input type="range" id="maxRange" min="0" max="20000" step="100" value="20000" class="w-100 mb-3">
+              <button id="applyPrice" class="btn btn-primary btn-sm">Apply</button>
+            </div>
+          </div>
         </div>
+
+        <!-- Product Grid -->
         <div class="col-md-9">
           <div class="row" id="product-list">
-            <!-- Clothing Products -->
-            <div class="col-md-4 mb-3 product-item" data-category="clothing">
-              <div class="card">
+            <!-- === CLOTHING === -->
+            <div class="col-md-4 mb-3 product-item" data-category="clothing" data-id="green-dress" data-price="400">
+              <div class="card h-100">
                 <a href="product-view.html?product=green-dress">
-                  <img src="assets/images/images.jpeg" class="card-img-top" alt="Product 1" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/images.jpeg" class="card-img-top" alt="Green Dress" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Green Dress</h5>
                   <p class="card-text">₹400</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="green-dress">Add to Cart</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 mb-3 product-item" data-category="clothing">
-              <div class="card">
+
+            <div class="col-md-4 mb-3 product-item" data-category="clothing" data-id="blue-shirt" data-price="500">
+              <div class="card h-100">
                 <a href="product-view.html?product=blue-shirt">
-                  <img src="assets/images/download (2).jpeg" class="card-img-top" alt="Product 2" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/download (2).jpeg" class="card-img-top" alt="Blue Shirt" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Blue Shirt</h5>
                   <p class="card-text">₹500</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="blue-shirt">Add to Cart</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 mb-3 product-item" data-category="clothing">
-              <div class="card">
+
+            <div class="col-md-4 mb-3 product-item" data-category="clothing" data-id="red-hat" data-price="300">
+              <div class="card h-100">
                 <a href="product-view.html?product=red-hat">
-                  <img src="assets/images/download (1).jpeg" class="card-img-top" alt="Product 3" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/download (1).jpeg" class="card-img-top" alt="Red Hat" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Red Hat</h5>
                   <p class="card-text">₹300</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="red-hat">Add to Cart</button>
                 </div>
               </div>
             </div>
-            <!-- Electronics Products -->
-            <div class="col-md-4 mb-3 product-item" data-category="electronics">
-              <div class="card">
+
+            <!-- === ELECTRONICS === -->
+            <div class="col-md-4 mb-3 product-item" data-category="electronics" data-id="smartphone" data-price="15000">
+              <div class="card h-100">
                 <a href="product-view.html?product=smartphone">
-                  <img src="assets/images/phone.jpeg" class="card-img-top" alt="Electronics 1" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/phone.jpeg" class="card-img-top" alt="Smartphone" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Smartphone</h5>
                   <p class="card-text">₹15000</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="smartphone">Add to Cart</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 mb-3 product-item" data-category="electronics">
-              <div class="card">
+
+            <div class="col-md-4 mb-3 product-item" data-category="electronics" data-id="wireless-headphones" data-price="5000">
+              <div class="card h-100">
                 <a href="product-view.html?product=wireless-headphones">
-                  <img src="assets/images/headphone.jpeg" class="card-img-top" alt="Electronics 2" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/headphone.jpeg" class="card-img-top" alt="Wireless Headphones" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Wireless Headphones</h5>
                   <p class="card-text">₹5000</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="wireless-headphones">Add to Cart</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 mb-3 product-item" data-category="electronics">
-              <div class="card">
+
+            <div class="col-md-4 mb-3 product-item" data-category="electronics" data-id="smart-watch" data-price="8000">
+              <div class="card h-100">
                 <a href="product-view.html?product=smart-watch">
-                  <img src="assets/images/watch.jpeg" class="card-img-top" alt="Electronics 3" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/watch.jpeg" class="card-img-top" alt="Smart Watch" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Smart Watch</h5>
                   <p class="card-text">₹8000</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="smart-watch">Add to Cart</button>
                 </div>
               </div>
             </div>
-            <!-- Accessories Products -->
-            <div class="col-md-4 mb-3 product-item" data-category="accessories">
-              <div class="card">
+
+            <!-- === ACCESSORIES === -->
+            <div class="col-md-4 mb-3 product-item" data-category="accessories" data-id="leather-belt" data-price="600">
+              <div class="card h-100">
                 <a href="product-view.html?product=leather-belt">
-                  <img src="assets/images/belt.jpeg" class="card-img-top" alt="Accessories 1" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/belt.jpeg" class="card-img-top" alt="Leather Belt" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Leather Belt</h5>
                   <p class="card-text">₹600</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="leather-belt">Add to Cart</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 mb-3 product-item" data-category="accessories">
-              <div class="card">
+
+            <div class="col-md-4 mb-3 product-item" data-category="accessories" data-id="sunglasses" data-price="1200">
+              <div class="card h-100">
                 <a href="product-view.html?product=sunglasses">
-                  <img src="assets/images/suglass.jpeg" class="card-img-top" alt="Accessories 2" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/suglass.jpeg" class="card-img-top" alt="Sunglasses" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Sunglasses</h5>
                   <p class="card-text">₹1200</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="sunglasses">Add to Cart</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 mb-3 product-item" data-category="accessories">
-              <div class="card">
+
+            <div class="col-md-4 mb-3 product-item" data-category="accessories" data-id="backpack" data-price="2000">
+              <div class="card h-100">
                 <a href="product-view.html?product=backpack">
-                  <img src="assets/images/bag.jpeg" class="card-img-top" alt="Accessories 3" style="height: 250px; object-fit: cover;">
+                  <img src="assets/images/bag.jpeg" class="card-img-top" alt="Backpack" style="height: 250px; object-fit: cover;">
                 </a>
-                <div class="card-body text-center">
+                <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">Backpack</h5>
                   <p class="card-text">₹2000</p>
-                  <div class="rating">
+                  <div class="rating mb-2">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                   </div>
-                  <button class="btn btn-primary mt-2">Add to Cart</button>
+                  <button class="btn btn-primary mt-auto add-to-cart" data-id="backpack">Add to Cart</button>
                 </div>
               </div>
             </div>
@@ -196,34 +232,106 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="bg-dark text-white text-center p-3 mt-5">
     <p>&copy; 2025 E-commerce. All rights reserved.</p>
   </footer>
 
-  <a href="#" class="btn btn-secondary back-to-top" style="position: fixed; bottom: 20px; right: 20px; display: none;">↑</a>
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-secondary back-to-top" style="position: fixed; bottom: 20px; right: 20px; display: none;">Up</a>
 
+  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <script>
     $(document).ready(function() {
-      // Show all products by default
-      $('.product-item').show();
+      // === Cart Management ===
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      function updateCartBadge() {
+        $('#cartBadge').text(cart.length);
+      }
+      updateCartBadge();
 
-      // Handle category filter changes
-      $('#categoryFilter').change(function() {
-        var category = $(this).val();
-        
-        // Hide all products
-        $('.product-item').hide();
-        
-        // Show products of the selected category or all if 'all' is selected
-        if (category === 'all') {
-          $('.product-item').show();
+      // Add to Cart
+      $(document).on('click', '.add-to-cart', function() {
+        const productId = $(this).data('id');
+        const product = $(this).closest('.product-item');
+        const name = product.find('.card-title').text();
+        const price = parseInt(product.data('price'));
+        const image = product.find('img').attr('src');
+
+        const existing = cart.find(item => item.id === productId);
+        if (existing) {
+          existing.quantity += 1;
         } else {
-          $('.product-item[data-category="' + category + '"]').show();
+          cart.push({ id: productId, name, price, image, quantity: 1 });
         }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        alert(`${name} added to cart!`);
       });
+
+      // === Price Range Slider ===
+      function updatePriceDisplay() {
+        const min = parseInt($('#minRange').val());
+        const max = parseInt($('#maxRange').val());
+        $('#minPrice').text(`₹${min}`);
+        $('#maxPrice').text(`₹${max}`);
+      }
+
+      $('#minRange, #maxRange').on('input', function() {
+        const min = parseInt($('#minRange').val());
+        let max = parseInt($('#maxRange').val());
+        if (min > max) max = min; // Ensure max is not less than min
+        $('#maxRange').val(max);
+        updatePriceDisplay();
+      });
+
+      $('#applyPrice').click(function() {
+        applyFilters();
+      });
+
+      // === Filter Logic ===
+      function applyFilters() {
+        const category = $('#categoryFilter').val();
+        const minPrice = parseInt($('#minRange').val());
+        const maxPrice = parseInt($('#maxRange').val());
+        const $items = $('.product-item');
+
+        $items.addClass('fade-out');
+        setTimeout(() => {
+          $items.hide();
+          let $filtered = $items;
+
+          // Apply category filter
+          if (category !== 'all') {
+            $filtered = $filtered.filter(`[data-category="${category}"]`);
+          }
+
+          // Apply price filter
+          $filtered = $filtered.filter(function() {
+            const price = parseInt($(this).data('price'));
+            return price >= minPrice && price <= maxPrice;
+          });
+
+          // Show filtered items
+          $filtered.removeClass('fade-out').addClass('fade-in').show();
+
+          // Show "No products found" if no matches
+          if ($filtered.length === 0) {
+            $('#product-list').append('<div class="col-12 text-center text-muted">No products found</div>');
+          } else {
+            $('#product-list .text-center').remove();
+          }
+        }, 300);
+      }
+
+      // Initial setup
+      updatePriceDisplay();
+      $('.product-item').addClass('fade-in');
+      $('#categoryFilter').change(applyFilters);
     });
   </script>
 </body>
